@@ -22,7 +22,7 @@
 			<li><a href="women">WOMEN</a></li>
 			<li><a href="baby">BABY・KIDS</a></li>
 
-sara
+
 		</div>
 
 		<div id="top_menu2">
