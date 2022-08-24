@@ -1,0 +1,207 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Noto Sans KR', sans-serif;
+  border-radius: 5px;
+}
+
+header {
+  border-bottom: 1px solid #dadada;
+}
+
+.navbar {
+  position: relative;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0px 60px;
+  top: 10px;
+  height: 100px;
+
+}
+
+.logo {
+  line-height: 60px;
+  float: left;
+}
+
+.logo img {
+  vertical-align: middle;
+}
+
+#top_menu {
+  float: left;
+  margin: 30px;
+}
+
+#top_menu2 {
+  float: right;
+}
+
+
+.search_img {
+  display: inline;
+}
+
+
+
+
+.navbar ul {
+  float: right;
+  margin-top: 30px;
+  display: flex;
+}
+
+.li a {
+  font-size: 16px;
+}
+
+.navbar li {
+  list-style-type: none;
+  float: left;
+  margin-right: 30px;
+
+}
+
+.navbar a {
+  text-decoration: none;
+  color: black;
+  font-style: bold;
+  font-size: 13px;
+}
+
+body {
+  margin: 0 auto;
+}
+
+body,
+table,
+div,
+p,
+span {
+  font-family: 'Noto Sans KR';
+}
+
+form p {
+  text-align: left;
+  font-size: 12px;
+  color: #666
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+.login_it{
+  color: #18A8F1;
+}
+
+#con {
+  width: 100%;
+  height: 100vh;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 0;
+}
+
+#login {
+  width: 600px;
+  height: 600px;
+  margin: 0 auto;
+  /* position: relative; */
+  /* background:#ddd; */
+}
+
+#login_form {
+  /* text-align:center; */
+  border-radius: 10px;
+  padding: 30px 50px;
+  background-color: #EEEFF1;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login {
+  font-size: 25px;
+  font-weight: 900;
+  color: #333;
+}
+
+.size {
+  width: 300px;
+  height: 30px;
+  padding-left: 10px;
+  
+  /* margin-left:10px; */
+  border: none;
+  border-radius: 5px;
+}
+
+.btn {
+  width: 310px;
+  height: 40px;
+  font-size: 15px;
+  background: #18A8F1;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+
+hr {
+  margin-top: 20px;
+  background: #fff;
+
+}
+
+.find {
+  color: #ddd;
+  font-size: 12px;
+}
+
+.find span {
+  padding-left: 10px;
+}
+
+.find span::before {
+  content: '|';
+  color: #333;
+  padding-right: 10px;
+}
+
+.find span:nth-child(1):before {
+  content: none;
+}
+
+.find span:nth-child(1) {
+  padding-left: 0px;
+}
+
+
+
+.num1 {
+  width: 60px;
+  text-align: left;
+}
+
+.num2 {
+  width: 235px;
+}
+
+
+.footer {
+  text-align: center;
+}
+
+.footer img {
+  margin-top: 40px;
+  height: 20px;
+  margin-bottom: 80px;
+  margin-left: 10px;
+  margin-right: 10px;
+}

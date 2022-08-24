@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Clear</title>
+  <meta charset="utf-8" />
+  <link href="/쇼핑몰/clear.css" rel="stylesheet" />
+</head>
+
+
+<header>
+  <div class="navbar">
+    <div class="photo">
+      <a class="logo" href="/쇼핑몰/home.html">
+        <img src="/images/로고 등 기타/logo.png" height="80px">
+      </a>
+    </div>
+  
+  </div>
+</header>
+<div class="message">
+  <h1>ご登録ありがとうございます。</h1>
+  
+      </div>
+
+
+
+<body>
+
+  <div class="main-form" >
+    <p>ご入力いただいたメールアドレス宛てに、</p>
+    <p>ご確認メールを送信いたしました。</p>
+    <br>
+
+    <div class="btn"><a href="/쇼핑몰/home.html">トップ画面へ</a></div>
+
+  </div>
+
+
+</body>
+<footer>
+  <div class="footer">
+    <a href="https://ko-kr.facebook.com/"><img src="/images/facebook.jpg"></a>
+    <a href="https://www.instagram.com/"><img src="/images/instar.jpg"></a>
+    <a href="https://twitter.com/?lang=jp"><img src="/images/tw.jpg"></a>
+  </div>
+</footer>
+
+</html>
