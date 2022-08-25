@@ -12,15 +12,18 @@
 <style type="text/css">
 .cart-form {
 	padding-left: 115px;
-	float: left;
-	width: 40%;
 	/* 	background-color: #EEEFF1; */
 	margin-right: auto;
 	margin-left: auto;
 	margin-top: 50px;
 	margin-bottom: 50px;
 	padding: 20px;
-	float: left;
+}
+
+.cart {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .container {
@@ -36,23 +39,40 @@
 	float: left;
 	width: 50%;
 }
+
+.left {
+	float: left;
+	position: relative;
+	max-width: 1280px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0px 60px;
+	position: relative;
+}
+
+.right {
+	display: flex;
+}
 </style>
 
 
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script type="text/javascript">
-	function del() {
-
-		var postUri = '${pageContext.request.contextPath}/cartDel'; //url signupOk 으로 값을 받음
-		$('#del').attr('action', postUri); //#signForm  form의id로 값 받아옴 
-		$('#del').attr('method', 'post');
-		$('#del').submit();
-		// location.href = 'top';
-	}
+		function delCart(cartNum) {
+			var postUri = '${pageContext.request.contextPath}/cartDel'; 
+			$('#cartNum').val(cartNum); 
+			$('#cartDel').attr('action', postUri); 
+			$('#cartDel').attr('method', 'post');
+			$('#cartDel').submit();
+		}
+		
+		window.onload = function(){
+			
+			  
+			}
 </script>
 
 </head>
-
 
 <header>
 	<div class="navbar">
@@ -86,11 +106,12 @@
 
 
 <body>
-	<div class="container">
-		<div class="cart">
-			<h1>カート</h1>
 
-		</div>
+	<div class="cart">
+		<h1>カート</h1>
+
+	</div>
+	<div class="container">
 		<div class="cart-form" method="POST">
 			<!-- <form action="/쇼핑몰/home.html">
 			<input type="text" name="email" class="text-field" placeholder="ID">
@@ -98,42 +119,38 @@
 				placeholder="パスワード"> <input type="submit" value="ログイン"
 				class="submit-btn">
 		</form> -->
-			<div class="left">
+			<form id="cartDel">
+				<input type="hidden" name="cartNum" id="cartNum">
+			</form>
 
-
-				<c:forEach var="goods" items="${cartList}" begin="1" end="10">
-					<form action="cartDel" name="del" id="del">
-						<img src="images/men/${goods.goodPhoto}" width="300px"
-							height="300px">
-						<!-- 						<div class="container"> -->
-						<p>${goods.goodsName}</p>
-						<p>${goods.goodsPrice}</p>
-						<select id="select_box" class="select_box" name="cartCount">
+			<c:forEach var="goods" items="${cartList}">
+				<div class="left">
+					<img src="images/men/${goods.goodPhoto}" width="300px"
+						height="300px">
+					<!-- 						<div class="container"> -->
+					<p>${goods.goodsName}</p>
+					<input type="hidden" id="${goods.cartNum}"
+						value="${goods.cartCount}">
+					<p>
+						<span id="goodsPrice">${goods.goodsPrice}</span> <select
+							id="select_box${goods.cartNum}" class="select_box"
+							name="cartCount">
 							<c:forEach var="i" begin="1" end="10">
 								<option value="${i}">${i}</option>
+
 							</c:forEach>
-						</select> <input type="button" value="削除" class="btn" onclick="del()">
-					</form>
-				</c:forEach>
+						</select> <input type="button" value="削除" class="btn" name="del"
+							onclick="delCart(${goods.cartNum})">
+					</p>
 
-				<div>
-					<div class="right"></div>
+
 				</div>
-				<%-- 			<div> <c:forEach var="goods" --%>
-				<%-- 				items="${goodsList}"> --%>
-				<!-- 				<div class="wrapper"> -->
-				<!-- 					items -> Collection 객체, list 돌릴땐 foreach 추천 -->
-				<!-- 										<div class="box1"> -->
-				<!-- 					<a -->
-				<%-- 						href="${pageContext.request.contextPath}/reji?itemsDetail=${goods.photo}"> --%>
-				<!-- 					</a> -->
-				<%-- 					<p>${goods.goodsPrice} </p> --%>
-				<!-- 										</div> -->
-				<!-- 				</div> -->
-				<%-- 			</c:forEach></div> --%>
-
-			</div>
+			</c:forEach>
 		</div>
+	</div>
+
+	</div>
+
 </body>
 
 <!-- 	<div class="links">

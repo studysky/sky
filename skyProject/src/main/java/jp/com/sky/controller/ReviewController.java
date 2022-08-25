@@ -22,7 +22,8 @@ public class ReviewController {
 	private ReviewDao reviewDao;
 
 	@RequestMapping(value = "/reviewItem", method = { RequestMethod.GET, RequestMethod.POST })
-	public String reviewItem(Model model, HttpSession session, @RequestParam String riviewItem) throws Exception {
+	public String reviewItem(Model model, HttpSession session, @RequestParam String riviewItem,
+			@RequestParam String reviewNum) throws Exception {
 
 		String userId = null;
 
@@ -32,6 +33,8 @@ public class ReviewController {
 		userId = (String) session.getAttribute("userId");
 
 		reviewDto = reviewDao.getReviewItem(riviewItem, userId);
+
+		reviewDao.reviewDel(reviewNum);
 
 //		if ((String) session.getAttribute("userId") == null) {
 //			model.addAttribute("errorMessage", "ä˘Ç…ìoò^Ç≥ÇÍÇƒÇ¢ÇÈIDÇ≈Ç∑ÅBÅI");
@@ -50,10 +53,9 @@ public class ReviewController {
 	 * }
 	 */
 	@RequestMapping(value = "/review", method = { RequestMethod.GET, RequestMethod.POST })
-	public String review(Model model, HttpSession session, @RequestParam String tittle, @RequestParam String review)
-			throws Exception {
+	public String review(Model model, HttpSession session, @RequestParam String tittle, @RequestParam String review,
+			@RequestParam String goodsName) throws Exception {
 
-		String goodsName = null;
 		String userId = null;
 
 		userId = (String) session.getAttribute("userId");
@@ -62,9 +64,27 @@ public class ReviewController {
 
 		reviewDao.reviewInsert(userId, review, tittle, goodsName);
 
-		reviewList = reviewDao.getReviewList(userId, tittle, review);
+		reviewList = reviewDao.getReviewList(goodsName);
 
 		model.addAttribute("reviewList", reviewList);
+
+		return "review";
+	}
+
+	@RequestMapping(value = "/reviewDel", method = { RequestMethod.GET, RequestMethod.POST })
+	public String reviewDel(Model model, HttpSession session, @RequestParam String reviewNum, @RequestParam String goodsName) throws Exception {
+
+		String userId = null;
+
+		userId = (String) session.getAttribute("userId");
+		
+		List<ReviewDto> reviewList = new ArrayList<ReviewDto>();
+
+		
+		reviewDao.reviewDel(reviewNum);
+		
+		reviewList = reviewDao.getReviewList(goodsName);
+		
 
 		return "review";
 	}

@@ -53,14 +53,14 @@ public class UserController {
 
 		if (userDao.loginUserId(userDto.getUserId(), userDto.getUserPw())) {
 			session.setAttribute("userId", userDto.getUserId());
-			return "top_ok";
+			return "top";
 		} else {
-			model.addAttribute("loginError", "IDかパスワードに誤りがあります。");
+			model.addAttribute("loginError", "ご登録のIDとパスワードが一致しません。ご確認の上、もう一度ご入力ください。");
 
 			return "login";
 		}
 
-	}
+	}	
 
 	@RequestMapping(value = "/doLogout", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logout(HttpServletRequest request) throws Exception {

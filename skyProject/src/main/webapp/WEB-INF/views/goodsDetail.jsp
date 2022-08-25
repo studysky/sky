@@ -90,7 +90,8 @@ alert('failed');
 		<div id="top_menu2">
 			<ul>
 				<li><a href="shop">Q&A</a></li>
-				<li><a href="${pageContext.request.contextPath}/goodscart?goodsName=">Cart</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/goodscart?goodsName=">Cart</a></li>
 				<li><a href="login">Login</a></li>
 			</ul>
 		</div>
@@ -108,9 +109,9 @@ alert('failed');
 
 
 	<h1>${headerName}</h1>
-<div class="btn-right">
-	<button onclick="itemOderBy(1)">昇順</button>
-	<button onclick="itemOderBy(2)">降順</button>
+	<div class="btn-right">
+		<button onclick="itemOderBy(1)">昇順</button>
+		<button onclick="itemOderBy(2)">降順</button>
 	</div>
 
 	<div class="container">

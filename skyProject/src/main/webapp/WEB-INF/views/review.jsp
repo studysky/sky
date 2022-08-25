@@ -11,6 +11,18 @@
 	rel="stylesheet" />
 
 
+<script type="text/javascript">
+<script type="text/javascript">
+function delReivew(reviewNum) {
+	var postUri = '${pageContext.request.contextPath}/reviewDel'; 
+	$('#reviewNum').val(reviewNum); 
+	$('#reviewDel').attr('action', postUri); 
+	$('#reviewDel').attr('method', 'post');
+	$('#reviewDel').submit();
+}
+</script>
+
+
 <style type="text/css">
 .infor {
 	text-align: center;
@@ -75,6 +87,40 @@
 .iii {
 	width: 400px;
 	height: 400px;
+}
+
+.comennt {
+	position: relative;
+	padding: 30px 0px;
+	border-width: 0px 0px 1px;
+	border-color: rgb(218, 218, 218);
+	border-style: solid;
+}
+
+.tittle {
+	display: flex;
+	width: 100%;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	list-style: none;
+	margin: 0px 0px 10px;
+}
+
+.review {
+	font-size: 20px;
+}
+
+.reviewid {
+	font-size: 14px;
+	letter-spacing: 0px;
+	line-height: 1.5;
+	word-break: break-word;
+	text-decoration: none;
+	color: rgb(90, 90, 90);
+	text-align: justify;
+	margin-top: 15px;
 }
 </style>
 
@@ -143,9 +189,11 @@
 			<!--reivew 機能はログインした人のみ  -->
 			<form action="review">
 				<input type="text" class="input1" id="tittle" name="tittle"
-					value="${goodsName}" maxlength="20" placeholder="タイトルを入力してください。">
+					maxlength="20" placeholder="タイトルを入力してください。">
 				<div>
 					<h5 class="h5">コメント内容</h5>
+					<input type="hidden" name="goodsName"
+						value="${reviewDto.goodsName}">
 				</div>
 
 				<input type="text" class="input2" id="review" name="review"
@@ -155,15 +203,27 @@
 		</div>
 
 		<div class="siro">
+
+
+
 			<div>
 				コメント欄
-
+				<form id="reviewDel">
+					<input type="hidden" name="reviewNum" id="reviewNum">
+					<input type="hidden" name="goodsName"
+						value="${reviewDto.goodsName}">
+				</form>
 				<c:forEach var="review" items="${reviewList}">
+					<div class="comennt">
 
-					<p>${review.userId}</p>
-					<p>${review.tittle}</p>
-					<p>${review.review}</p>
+						<div class="tittle">${review.tittle}</div>
+						<div class="review">${review.review}</div>
+						<div class="reviewid">${review.userId}</div>
+						<input type="button" value="削除" class="btn" name="del"
+							onclick="delReivew(${review.reviewNum})">
+					</div>
 				</c:forEach>
+
 
 
 			</div>

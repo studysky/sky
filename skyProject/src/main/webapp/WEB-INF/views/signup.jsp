@@ -44,36 +44,36 @@ $(document).ready(function(){
 	 var strEmail = email.value;
 	 
 	 if(useridStr ==''){
-		 alert('IDを入力してください');
+		 alert('ID欄は必須項目です。4～10文字を入力してください。');
 		 return;
 		 }else if(useridLen <=3 || useridLen >=13) {
-			 alert('IDには4~10文字を入力してください')
+			 alert('IDには4～10文字を入力してください。')
 			 return;
 		 }
 	 if(userpwStr ==''){
-		 alert('PWを入力してください');
+		 alert('パスワード欄は必須項目です。8～16文字を入力してください。');
 		 return;
 		 }else if(userpwLen <= 7 || userpwLen >=17) {
-			 alert('PWには8~16文字を入力してください')
+			 alert('PWには8～16文字を入力してください。')
 		 return;
 		 }
 
 	 if(userpw2Str ==''){
-		 alert('PW確認を入力してください');
+		 alert('パスワード確認欄は必須項目です。8～16文字を入力してください。');
 		 return;
 		 }else if(userpw2Len <= 7 || userpw2Len >=17) {
-			 alert('PW確認には8~16文字を入力してください')
+			 alert('パスワード確認には8～16文字を入力してください。')
 		 return;
 		 }else if(userpwStr != userpw2Str){
-			 alert('PWが一致していません。')
+			 alert('パスワードが一致していません。')
 		 return;
 		 }
 	 
 	 if(userNameStr ==''){
-		 alert('お名前を入力してください');
+		 alert('お名前欄は必須項目です。4～10文字を入力してください');
 		 return;
 		 }else if(userNameLen <= 3 || userNameLen >=11) {
-			 alert('お名前は4~10文字を入力してください')
+			 alert('お名前は4～10文字を入力してください')
 		 return;
 		 }
 	 

@@ -10,7 +10,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import jp.com.sky.dao.ReviewDao;
-import jp.com.sky.shopdto.CartDto;
 import jp.com.sky.shopdto.ReviewDto;
 import jp.com.sky.utils.DbUtil;
 
@@ -25,7 +24,7 @@ public class ReviewDaoImp implements ReviewDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		final String SQL = " INSERT INTO REVIEW (REVIEWNUM,USERID,REVIEW, TITTEL,GOODSNAME) VALUES (REVIEW_SEQ.NEXTVAL,? ,? ,? ,?)";
+		final String SQL = "INSERT INTO REVIEW (REVIEWNUM,USERID,REVIEW, TITTEL,GOODSNAME) VALUES (REVIEW_SEQ.NEXTVAL , ? , ? , ? , ?)";
 
 		try {
 			conn = DbUtil.DbConnection();
@@ -62,7 +61,7 @@ public class ReviewDaoImp implements ReviewDao {
 	}
 
 	@Override
-	public List<ReviewDto> getReviewList(String userId, String tittle, String review) throws Exception {
+	public List<ReviewDto> getReviewList(String goodsName) throws Exception {
 //	public ReviewDto getReviewList(String riviewItem, String userId) throws Exception {
 		List<ReviewDto> comment = new ArrayList<ReviewDto>();
 		Connection conn = null;
@@ -71,8 +70,7 @@ public class ReviewDaoImp implements ReviewDao {
 //		ReviewDto reviewDto = new ReviewDto();
 		StringBuffer sb = new StringBuffer();
 
-		sb.append(
-				"SELECT R.USERID, R.TITTEL, R.REVIEW FROM REVIEW R INNER JOIN USERDB UB ON UB.USERID = R.USERID WHERE R.USERID = ?");
+		sb.append("SELECT R.USERID, R.TITTEL, R.REVIEW,R.GOODSNAME, R.REVIEWNUM FROM REVIEW R  WHERE R.GOODSNAME = ?");
 //		sb.append(" SELECT C.USERID,");
 //		sb.append(" C.GOODSNAME,");
 //		sb.append(" GD.PHOTO ");
@@ -85,14 +83,16 @@ public class ReviewDaoImp implements ReviewDao {
 		try {
 			conn = DbUtil.DbConnection();
 			ps = conn.prepareStatement(sb.toString());
-			ps.setString(1, userId);
+			ps.setString(1, goodsName);
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				ReviewDto reviewDto = new ReviewDto();
 				reviewDto.setUserId(rs.getString("USERID"));
-				reviewDto.setUserId(rs.getString("TITTEL"));
-				reviewDto.setUserId(rs.getString("REVIEW"));
+				reviewDto.setTittle(rs.getString("TITTEL"));
+				reviewDto.setReview(rs.getString("REVIEW"));
+				reviewDto.setReviewNum(rs.getInt("REVIEWNUM"));
+				reviewDto.setGoodsName(rs.getString("GOODSNAME"));
 				comment.add(reviewDto);
 			}
 
@@ -116,7 +116,7 @@ public class ReviewDaoImp implements ReviewDao {
 		ResultSet rs = null;
 		ReviewDto reviewDto = new ReviewDto();
 
-		final String SQL = ("SELECT ? AS USERID, GD.GOODSNAME,GD.PHOTO FROM GOODS GD WHERE GD.GOODSNAME = ?");
+		final String SQL = "SELECT ? AS USERID, GD.GOODSNAME,GD.PHOTO FROM GOODS GD WHERE GD.GOODSNAME = ?";
 
 		try {
 			conn = DbUtil.DbConnection();
@@ -127,6 +127,7 @@ public class ReviewDaoImp implements ReviewDao {
 
 			while (rs.next()) {
 				reviewDto.setGoodsName(rs.getString("GOODSNAME"));
+				reviewDto.setUserId(rs.getString("USERID"));
 				reviewDto.setPhoto(rs.getString("PHOTO"));
 			}
 
@@ -143,4 +144,31 @@ public class ReviewDaoImp implements ReviewDao {
 		return reviewDto;
 	}
 
+	@Override
+	public void reviewDel(String del) throws Exception {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		final String SQL = "DELETE FROM REVIEW WHERE REVIEWNUM = ?";
+
+		try {
+			conn = DbUtil.DbConnection();
+			ps = conn.prepareStatement(SQL);
+			ps.setString(1, del);
+			rs = ps.executeQuery();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (ps != null)
+				conn.close();
+			if (ps != null)
+				ps.close();
+			if (rs != null)
+				rs.close();
+
+		}
+
+	}
 }

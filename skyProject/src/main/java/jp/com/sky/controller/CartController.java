@@ -15,17 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jp.com.sky.dao.CartDao;
-import jp.com.sky.dao.GoodsDao;
 import jp.com.sky.shopdto.CartDto;
-import jp.com.sky.shopdto.GoodsDto;
 
 @Controller
 public class CartController {
 	@Autowired
 	private CartDao cartDao;
-
-	@Autowired
-	private GoodsDao goodDao;
 
 	@RequestMapping(value = "/goodscart", method = { RequestMethod.GET, RequestMethod.POST })
 //	public String cart(Locale locale, Model model, HttpSession session, CartDto cartDto,
@@ -33,22 +28,21 @@ public class CartController {
 	public String cart(Locale locale, Model model, HttpSession session, @RequestParam String goodsName,
 			@RequestParam String cartCount, HttpServletRequest httpServletRequest) throws Exception {
 
-		String del = null;
 		String userId = null;
 		List<CartDto> cartList = new ArrayList<CartDto>();
-		List<GoodsDto> goods = new ArrayList<GoodsDto>();
+//		List<GoodsDto> goods = new ArrayList<GoodsDto>();
+
+		userId = (String) session.getAttribute("userId");
 //		List<CartDto> cartItem = new ArrayList<CartDto>();
 
 		// String zero = httpServletRequest.getParameter("カートには何も入ってないです。");
-		cartDao.cartItem(del);
-		cartDao.cartInsert(userId, goodsName);
+		cartDao.cartInsert(userId, goodsName, cartCount);
 		// userId 값을 가져온다
-		userId = (String) session.getAttribute("userId");
 
-		goods = goodDao.getGoodsList(goodsName);
+//		goods = goodDao.getGoodsList(goodsName);
 		cartList = cartDao.getCartList(userId);
 
-		model.addAttribute("goodsList", goods);
+//		model.addAttribute("goodsList", goods);
 		model.addAttribute("cartList", cartList);
 
 		return "cart";// cartDao.cartInsert(cartDto.getUserId(), cartDto.getCartNum(),
@@ -57,12 +51,15 @@ public class CartController {
 //		model.addAttribute("",cartDao); 見せない
 	}
 
-	@RequestMapping(value = "/reji", method = { RequestMethod.GET, RequestMethod.POST })
-	public String reji(Locale locale, Model model, HttpSession session, @RequestParam String goodsName,
+	@RequestMapping(value = "/cartDel", method = { RequestMethod.GET, RequestMethod.POST })
+	public String reji(Locale locale, Model model, HttpSession session, @RequestParam String cartNum,
 			HttpServletRequest httpServletRequest) throws Exception {
 		String userId = null;
-
-		cartDao.cartInsert(userId, goodsName);
-		return "reji";
+		userId = (String) session.getAttribute("userId");
+		List<CartDto> cartList = new ArrayList<CartDto>();
+		cartDao.cartDel(cartNum);
+		cartList = cartDao.getCartList(userId);
+		model.addAttribute("cartList", cartList);
+		return "cart";
 	}
 }

@@ -73,11 +73,10 @@
 			<li><a href="baby">BABY・KIDS</a></li>
 		</div>
 
-		<div id="top_menu2">
 			<ul>
 				<li><a href="shop">Q&A</a></li>
 				<li><a
-					href="${pageContext.request.contextPath}/goodscart?goodsName=">Cart</a></li>
+					href="${pageContext.request.contextPath}/goodscart?goodsName=${goodsName}">Cart</a></li>
 				<li><a href="login">Login</a></li>
 			</ul>
 		</div>
@@ -126,6 +125,7 @@
 
 		<form action="reviewItem" id="reviewForm">
 			<input type="hidden" value="${goodsName}" name="riviewItem">
+			<input type="hidden" value="" name="reviewNum">
 			<input type="submit" class="btn1" value="add to review">
 		</form>
 	</div>
