@@ -85,6 +85,10 @@ public class ReviewController {
 		
 		reviewList = reviewDao.getReviewList(goodsName);
 		
+		model.addAttribute("reviewList", reviewList);
+		
+		
+		
 
 		return "review";
 	}

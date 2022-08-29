@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +62,11 @@ public class CartController {
 		cartList = cartDao.getCartList(userId);
 		model.addAttribute("cartList", cartList);
 		return "cart";
+	}
+	
+	@RequestMapping(value="url.do")
+	public String urlMethod(HttpServletRequest request , HttpServletResponse response, Model model ) throws Exception {		
+		// url.jsp라는 이름을 가진 팝업 생성
+		return "url";
 	}
 }

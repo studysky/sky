@@ -9,7 +9,6 @@
 	rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script language="javascript" type="text/javascript">
-
 	$(document).ready(function() {
 		var errorMessage;
 		errorMessage = $("reviewForm").val();
@@ -73,23 +72,22 @@
 			<li><a href="baby">BABY・KIDS</a></li>
 		</div>
 
-			<ul>
-				<li><a href="shop">Q&A</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/goodscart?goodsName=${goodsName}">Cart</a></li>
-				<li><a href="login">Login</a></li>
-			</ul>
-		</div>
-		<!-- 		<form action="#" class="aq" method="get"> -->
-		<!-- 			<div class="search"> -->
-		<!-- 				<input type="text" class="search" placeholder="キーワードで検索"> -->
-		<!-- 				<div class="search_img"> -->
-		<!-- 					<input type="image" src="images/other/search.jpg" width="30px" -->
-		<!-- 						height="30px"> -->
-		<!-- 				</div> -->
-		<!-- 			</div> -->
-		<!-- 		</form> -->
+		<ul>
+			<li><a href="qna">Q&A</a></li>
+			<li><a
+				href="${pageContext.request.contextPath}/goodscart?cartCount=1&goodsName=">Cart</a></li>
+			<li><a href="login">Login</a></li>
+		</ul>
 	</div>
+	<!-- 		<form action="#" class="aq" method="get"> -->
+	<!-- 			<div class="search"> -->
+	<!-- 				<input type="text" class="search" placeholder="キーワードで検索"> -->
+	<!-- 				<div class="search_img"> -->
+	<!-- 					<input type="image" src="images/other/search.jpg" width="30px" -->
+	<!-- 						height="30px"> -->
+	<!-- 				</div> -->
+	<!-- 			</div> -->
+	<!-- 		</form> -->
 
 
 	<h1></h1>
@@ -111,10 +109,10 @@
 		<form action="goodscart" name="count">
 			<div>
 				<select id="select_box" class="select_box" name="cartCount">
-				<c:forEach var="i" begin="1" end="10"> 
-					<option value="${i}">${i}</option>
-			
-				</c:forEach>
+					<c:forEach var="i" begin="1" end="10">
+						<option value="${i}">${i}</option>
+
+					</c:forEach>
 				</select>
 			</div>
 			<!-- 			<input type="hidden" value="cartInfor" name="cartInfor"> -->
@@ -125,8 +123,8 @@
 
 		<form action="reviewItem" id="reviewForm">
 			<input type="hidden" value="${goodsName}" name="riviewItem">
-			<input type="hidden" value="" name="reviewNum">
-			<input type="submit" class="btn1" value="add to review">
+			<input type="hidden" value="" name="reviewNum"> <input
+				type="submit" class="btn1" value="add to review">
 		</form>
 	</div>
 

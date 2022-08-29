@@ -85,6 +85,22 @@
 	});
 	
 </script>
+<style type="text/css">
+.submit-btn {
+	font-size: 14px;
+	border: none;
+	padding: 10px;
+	width: 260px;
+	background: #18A8F1;
+	border-radius: 16px;
+	margin-top: 20px;
+	margin-bottom: 30px;
+	color: white;
+	cursor: pointer;
+	cursor: pointer;
+	box-shadow: .8rem .5rem 1.4rem #BEC5D0, -.3rem -.4rem .8rem #FBFBFB;
+}
+</style>
 </head>
 
 <header>

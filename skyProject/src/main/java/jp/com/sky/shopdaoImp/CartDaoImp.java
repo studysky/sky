@@ -80,7 +80,7 @@ public class CartDaoImp implements CartDao {
 		sb.append("	    CR.CARTNUM,	");
 		sb.append("	    GD.PHOTO,	");
 		sb.append("	    GD.GOODSNAME,	");
-		sb.append("	    GD.GOODSPRICE*CR.CART_COUNT AS GOODSPRICE,	");
+		sb.append("	    GD.GOODSPRICE * CR.CART_COUNT AS GOODSPRICE,	");
 		sb.append("	    CR.CART_COUNT	");
 		sb.append("	FROM	");
 		sb.append("	    CART    CR	");

@@ -10,8 +10,7 @@
 <link href="${pageContext.request.contextPath}/css/review.css"
 	rel="stylesheet" />
 
-
-<script type="text/javascript">
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script type="text/javascript">
 function delReivew(reviewNum) {
 	var postUri = '${pageContext.request.contextPath}/reviewDel'; 
@@ -77,6 +76,28 @@ function delReivew(reviewNum) {
 	margin-top: 20px;
 	margin-bottom: 30px;
 	color: white;
+	cursor: pointer;
+	cursor: pointer;
+	box-shadow: .8rem .5rem 1.4rem #BEC5D0, -.3rem -.4rem .8rem #FBFBFB;
+}
+
+.btn1 {
+	font-size: 14px;
+	border: none;
+	width: 60px;
+	background: #18A8F1;
+	margin-top: 10px;
+	margin-bottom: 15px;
+	color: white;
+	cursor: pointer;
+	cursor: pointer;
+	box-shadow: .8rem .5rem 1.4rem #BEC5D0, -.3rem -.4rem .8rem #FBFBFB;
+}
+
+button: active {
+	box-shadow: inset -.3rem -.1rem 1.4rem #FBFBFB, inset .3rem .4rem .8rem
+		#BEC5D0;
+	cursor: pointer;
 }
 
 .siro {
@@ -91,7 +112,7 @@ function delReivew(reviewNum) {
 
 .comennt {
 	position: relative;
-	padding: 30px 0px;
+	padding: 20px 0px 5px;
 	border-width: 0px 0px 1px;
 	border-color: rgb(218, 218, 218);
 	border-style: solid;
@@ -121,6 +142,7 @@ function delReivew(reviewNum) {
 	color: rgb(90, 90, 90);
 	text-align: justify;
 	margin-top: 15px;
+	margin-bottom: 15px;
 }
 </style>
 
@@ -136,18 +158,18 @@ function delReivew(reviewNum) {
 			</a>
 		</div>
 		<div id="top_menu">
-
-			<li><a href="men">MEN</a></li>
-			<li><a href="women">WOMEN</a></li>
-			<li><a href="baby">BABY・KIDS</a></li>
-
+			<ul>
+				<li><a href="men">MEN</a></li>
+				<li><a href="women">WOMEN</a></li>
+				<li><a href="baby">BABY・KIDS</a></li>
+			</ul>
 		</div>
 
 		<div id="top_menu2">
 			<ul>
 				<li><a href="qna">Q&A</a></li>
 				<li><a
-					href="${pageContext.request.contextPath}/goodscart?goodsName=">Cart</a></li>
+					href="${pageContext.request.contextPath}/goodscart?cartCount=1&goodsName=">Cart</a></li>
 				<li><a href="login">Login</a></li>
 			</ul>
 		</div>
@@ -157,6 +179,7 @@ function delReivew(reviewNum) {
 <body>
 	<div class="cart">
 		<h1>レビュー</h1>
+
 
 		<!-- <form action="/쇼핑몰/home.html">
 			<input type="text" name="email" class="text-field" placeholder="ID">
@@ -209,9 +232,8 @@ function delReivew(reviewNum) {
 			<div>
 				コメント欄
 				<form id="reviewDel">
-					<input type="hidden" name="reviewNum" id="reviewNum">
-					<input type="hidden" name="goodsName"
-						value="${reviewDto.goodsName}">
+					<input type="hidden" name="reviewNum" id="reviewNum"> <input
+						type="hidden" name="goodsName" value="${reviewDto.goodsName}">
 				</form>
 				<c:forEach var="review" items="${reviewList}">
 					<div class="comennt">
@@ -219,7 +241,7 @@ function delReivew(reviewNum) {
 						<div class="tittle">${review.tittle}</div>
 						<div class="review">${review.review}</div>
 						<div class="reviewid">${review.userId}</div>
-						<input type="button" value="削除" class="btn" name="del"
+						<input type="button" value="削除" class="btn1" name="del"
 							onclick="delReivew(${review.reviewNum})">
 					</div>
 				</c:forEach>

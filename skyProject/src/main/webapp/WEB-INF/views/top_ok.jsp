@@ -29,7 +29,7 @@
 		<div id="top_menu2">
 			<ul>
 				<li><a href="shop">Q&A</a></li>
-				<li><a href="${pageContext.request.contextPath}/goodscart?goodsName=">Cart</a></li>
+				<li><a href="${pageContext.request.contextPath}/goodscart?cartCount=1&goodsName=">Cart</a></li>
 				<li><a href="login">Logout</a></li>
 			</ul>
 		</div>

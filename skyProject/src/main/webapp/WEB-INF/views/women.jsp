@@ -29,7 +29,7 @@
 		<div id="top_menu2">
 			<ul>
 				<li><a href="shop">Q&A</a></li>
-				<li><a href="${pageContext.request.contextPath}/goodscart?goodsName=">Cart</a></li>
+				<li><a href="${pageContext.request.contextPath}/goodscart?cartCount=1&goodsName="">Cart</a></li>
 				<li><a href="login">Login</a></li>
 			</ul>
 		</div>
@@ -85,11 +85,11 @@
 <footer>
 	<div class="footer">
 		<a href="https://ko-kr.facebook.com/"><img
-			src="resources/images/footer_logo/facebook.jpg"></a> <a
+			src="images/footer_logo/facebook.jpg"></a> <a
 			href="https://www.instagram.com/"><img
-			src="resources/images/footer_logo/instar.jpg"></a> <a
+			src="images/footer_logo/instar.jpg"></a> <a
 			href="https://twitter.com/?lang=jp"><img
-			src="resources/images/footer_logo/tw.jpg"></a>
+			src="images/footer_logo/tw.jpg"></a>
 	</div>
 </footer>
 </html>

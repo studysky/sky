@@ -122,7 +122,7 @@ alert('failed');
 					<!-- items -> Collection 객체, list 돌릴땐 foreach 추천 -->
 					<!-- 					<div class="box1"> -->
 					<a
-						href="${pageContext.request.contextPath}/goodsInfor?itemsDetail=${goods.photo}">
+						href="${pageContext.request.contextPath}/goodsInfor?goodsName=${goods.photo}">
 						<img src="images/men/${goods.photo}">
 					</a>
 					<p>${goods.goodsName}</p>

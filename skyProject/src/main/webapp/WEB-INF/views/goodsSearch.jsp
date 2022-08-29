@@ -107,8 +107,8 @@ alert('failed');
 
 		<div id="top_menu2">
 			<ul>
-				<li><a href="shop">Q&A</a></li>
-				<li><a href="cart">Cart</a></li>
+				<li><a href="qna">Q&A</a></li>
+				<li><a href="${pageContext.request.contextPath}/goodscart?cartCount=1&goodsName=">Cart</a></li>
 				<li><a href="login">Login</a></li>
 			</ul>
 		</div>

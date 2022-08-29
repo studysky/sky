@@ -53,6 +53,24 @@
 .right {
 	display: flex;
 }
+
+.btn1 {
+	font-size: 14px;
+	border: none;
+	width: 60px;
+	background: #18A8F1;
+	margin-top: 10px;
+	margin-bottom: 15px;
+	color: white;
+	cursor: pointer;
+	box-shadow: .8rem .5rem 1.4rem #BEC5D0, -.3rem -.4rem .8rem #FBFBFB;
+}
+
+.btn1: active {
+	box-shadow: inset -.3rem -.1rem 1.4rem #FBFBFB, inset .3rem .4rem .8rem
+		#BEC5D0;
+	cursor: pointer;
+}
 </style>
 
 
@@ -67,9 +85,12 @@
 		}
 		
 		window.onload = function(){
-			
+			var index = $("#select_box${goods.cartNum} option").index($("#select_box${goods.cartNum} option:selected"));
 			  
 			}
+		
+		
+	
 </script>
 
 </head>
@@ -125,8 +146,13 @@
 
 			<c:forEach var="goods" items="${cartList}">
 				<div class="left">
-					<img src="images/men/${goods.goodPhoto}" width="300px"
+
+					<a
+						href="${pageContext.request.contextPath}/goodsInfor?itemsDetail=${goods.goodPhoto}">
+						<img src="images/men/${goods.goodPhoto}" width="300px"
 						height="300px">
+					</a>
+
 					<!-- 						<div class="container"> -->
 					<p>${goods.goodsName}</p>
 					<input type="hidden" id="${goods.cartNum}"
@@ -139,17 +165,19 @@
 								<option value="${i}">${i}</option>
 
 							</c:forEach>
-						</select> <input type="button" value="削除" class="btn" name="del"
+						</select> <input type="button" value="削除" class="btn1" name="del"
 							onclick="delCart(${goods.cartNum})">
 					</p>
+					<form id="myForm" name="myForm">
+						<input type="hidden" name="sample" id="sample" value="sample" />
 
+					</form>
 
 				</div>
 			</c:forEach>
 		</div>
 	</div>
 
-	</div>
 
 </body>
 
