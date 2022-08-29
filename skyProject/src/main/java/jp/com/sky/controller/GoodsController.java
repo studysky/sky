@@ -43,8 +43,8 @@ public class GoodsController {
 	}
 
 	@RequestMapping(value = "/goodsInfor", method = { RequestMethod.GET, RequestMethod.POST })
-	public String infor(Model model, HttpServletRequest httpServletRequest, @RequestParam String itemsDetail, @RequestParam String goodsName)
-			throws Exception {
+	public String infor(Model model, HttpServletRequest httpServletRequest, @RequestParam String itemsDetail,
+			@RequestParam String goodsName) throws Exception {
 
 		List<GoodsDto> goodsInfor = new ArrayList<GoodsDto>();
 

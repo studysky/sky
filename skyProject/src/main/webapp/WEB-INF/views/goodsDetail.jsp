@@ -17,7 +17,6 @@
 	function itemOderBy(oderByVal) {
 		var oderByVal = oderByVal;
 		var goodsKind = $('#goodsKind').val();
-
 		$
 				.ajax({
 					async : false,
@@ -32,7 +31,6 @@
 						// 				var itemList = JSON.parse(json);
 						var itemList = json;
 						var innerHtmlText = '';
-
 						for ( var i in itemList) { //html 재구성해서 그 자리에 넣어줌
 							innerHtmlText += '<a href="${pageContext.request.contextPath}/goodsInfor?itemsDetail='
 									+ itemList[i].photo + '">';
@@ -48,7 +46,6 @@
 						alert('failed');
 					}
 				});
-
 	}
 </script>
 </head>
@@ -122,7 +119,7 @@ alert('failed');
 					<!-- items -> Collection 객체, list 돌릴땐 foreach 추천 -->
 					<!-- 					<div class="box1"> -->
 					<a
-						href="${pageContext.request.contextPath}/goodsInfor?goodsName=${goods.photo}">
+						href="${pageContext.request.contextPath}/goodsInfor?itemsDetail=${goods.photo}">
 						<img src="images/men/${goods.photo}">
 					</a>
 					<p>${goods.goodsName}</p>
