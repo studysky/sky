@@ -41,16 +41,6 @@ public class ReviewDto {
 		this.goodsName = goodsName;
 	}
 
-	public String getGoodPhoto() {
-		return goodPhoto;
-	}
-
-	public void setGoodPhoto(String goodPhoto) {
-		this.goodPhoto = goodPhoto;
-	}
-
-	private String goodPhoto;
-
 	public int getReviewNum() {
 		return reviewNum;
 	}

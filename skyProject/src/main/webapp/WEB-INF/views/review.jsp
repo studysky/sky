@@ -218,10 +218,14 @@ button: active {
 					<input type="hidden" name="goodsName"
 						value="${reviewDto.goodsName}">
 				</div>
-
-				<input type="text" class="input2" id="review" name="review"
-					maxlength="50" placeholder="コメント内容を入力してください。">
+				<input type="hidden" value="${reviewDto.goodsName}"
+					name="reviewItem"> <input type="text" class="input2"
+					id="review" name="review" maxlength="500"
+					placeholder="コメント内容を入力してください。">
 				<button type="submit" class="btn">登録</button>
+
+
+
 			</form>
 		</div>
 

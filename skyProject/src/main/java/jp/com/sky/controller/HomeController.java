@@ -81,7 +81,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/men", method = { RequestMethod.GET, RequestMethod.POST })
 	public String men(Locale locale, Model model, HttpSession session) {
-
+		String userId = null;
 		userId = (String) session.getAttribute("userId");
 		return "men";
 	}
@@ -97,23 +97,32 @@ public class HomeController {
 
 	@RequestMapping(value = "/qna", method = { RequestMethod.GET, RequestMethod.POST })
 	public String qna(Locale locale, Model model, HttpSession session) {
-
+		String userId = null;
 		userId = (String) session.getAttribute("userId");
 		return "qna";
 	}
 
 	@RequestMapping(value = "/women", method = { RequestMethod.GET, RequestMethod.POST })
 	public String women(Locale locale, Model model, HttpSession session) {
-
+		String userId = null;
 		userId = (String) session.getAttribute("userId");
 		return "women";
 	}
 
 	@RequestMapping(value = "/top_ok", method = { RequestMethod.GET, RequestMethod.POST })
 	public String top_ok(Locale locale, Model model, HttpServletRequest httpServletRequest, HttpSession session) {
-
+		String userId = null;
 		userId = (String) session.getAttribute("userId");
 		return "top_ok";
+	}
+
+	@RequestMapping(value = "/shopclear", method = { RequestMethod.GET, RequestMethod.POST })
+	public String shopclear(Locale locale, Model model, HttpSession session) {
+		String userId = null;
+
+		userId = (String) session.getAttribute("userId");
+
+		return "shopclear";
 	}
 
 //	@RequestMapping(value = "/cart", method = { RequestMethod.GET, RequestMethod.POST })

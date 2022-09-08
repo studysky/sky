@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import jp.com.sky.dao.CartDao;
 import jp.com.sky.shopdto.CartDto;
+import jp.com.sky.shopdto.GoodsDto;
 import jp.com.sky.utils.DbUtil;
 
 @Service
@@ -145,6 +146,74 @@ public class CartDaoImp implements CartDao {
 
 		}
 	}
+
+	@Override
+	public CartDto cartSum(String userId) throws Exception {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		CartDto cartDto = new CartDto();
+
+		final String SQL = "SELECT SUM(CART_COUNT) AS CART_COUNT  FROM CART WHERE USERID = ?";
+
+		try {
+			conn = DbUtil.DbConnection();
+			ps = conn.prepareStatement(SQL);
+			ps.setString(1, userId);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				cartDto.setCartCount(rs.getInt("CART_COUNT"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (ps != null)
+				conn.close();
+			if (ps != null)
+				ps.close();
+			if (rs != null)
+				rs.close();
+
+		}
+		return cartDto;
+	}
+
+	@Override
+	public CartDto cartPrice(String userId) throws Exception {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		CartDto cartDto = new CartDto();
+
+		final String SQL = "SELECT SUM(GD.GOODSPRICE * CR.CART_COUNT) AS PRICE FROM GOODS GD INNER JOIN CART CR ON GD.GOODSNAME = CR.GOODSNAME WHERE CR.USERID = ?";
+
+		try {
+			conn = DbUtil.DbConnection();
+			ps = conn.prepareStatement(SQL);
+			ps.setString(1, userId);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				cartDto.setCartCount(rs.getInt("PRICE"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (ps != null)
+				conn.close();
+			if (ps != null)
+				ps.close();
+			if (rs != null)
+				rs.close();
+
+		}
+		return cartDto;
+	}
+
+}
 // @Override
 // public void deleteCart(String cartNum) throws Exception {
 // Connection conn = null;
@@ -166,7 +235,6 @@ public class CartDaoImp implements CartDao {
 // ps.close();
 // }
 // }
-}
 
 //@Override
 //public List<CartDto> cartList() throws Exception {

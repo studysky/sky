@@ -10,20 +10,20 @@
 <link href="${pageContext.request.contextPath}/css/cart.css"
 	rel="stylesheet" />
 <style type="text/css">
+
+
 .cart-form {
-	padding-left: 115px;
-	/* 	background-color: #EEEFF1; */
+	float: left;
 	margin-right: auto;
-	margin-left: auto;
-	margin-top: 50px;
 	margin-bottom: 50px;
 	padding: 20px;
 }
 
 .cart {
-	text-align: center;
+	padding-left: 105px;
 	margin-left: auto;
 	margin-right: auto;
+	margin-left: auto;
 }
 
 .container {
@@ -68,14 +68,100 @@
 
 .btn1: active {
 	box-shadow: inset -.3rem -.1rem 1.4rem #FBFBFB, inset .3rem .4rem .8rem
-		#BEC5D0;
+		#BEC5D0 cursor: pointer;
+}
+
+.select_box {
+	width: 80px;
+	border: 1px solid;
+	box-sizing: border-box;
+	padding: 10px;
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 10px;
+	font-family: 'Roboto';
+}
+
+.select_box:focus {
+	border: 1px solid #18A8F1;
+	box-sizing: border-box;
+	border-radius: 10px;
+	outline: #18A8F1;
+}
+
+.list-table th {
+	border-bottom: 1px solid #CCC;
+}
+
+.img {
+	padding-top: 20px;
+}
+
+.table-box {
+	float: left;
+	width: 650px;
+	height: 300px;
+}
+
+.cartsum {
+	background-color: #f4f4f4;
+	display: inline-block;
+}
+
+.sum {
+	text-align: left;
+	padding: 30px 15px;
+}
+
+.sum1 {
+	text-align: right;
+	padding-left: 15px;
+}
+
+.page {
+	background: #fff;
+}
+
+.btn2 {
+	font-size: 14px;
+	border: none;
+	width: 250px;
+	background: #1b1b1b;;
+	margin-top: 40px;
+	margin-bottom: 20px;
+	color: white;
 	cursor: pointer;
+	text-align: center;
+	border-radius: 0;
+	padding: 10px 20px;
+}
+
+.btn3 {
+	font-size: 14px;
+	border: none;
+	width: 250px;
+	background: #fff;
+	margin-top: 20px;
+	margin-bottom: 15px;
+	color: #000;
+	border: 1px solid #1b1b1b;;
+	cursor: pointer;
+	text-align: center;
+	border-radius: 0;
+	padding: 10px 20px;
+}
+
+.user{
+
 }
 </style>
 
 
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script type="text/javascript">
+
 		function delCart(cartNum) {
 			var postUri = '${pageContext.request.contextPath}/cartDel'; 
 			$('#cartNum').val(cartNum); 
@@ -88,9 +174,6 @@
 			var index = $("#select_box${goods.cartNum} option").index($("#select_box${goods.cartNum} option:selected"));
 			  
 			}
-		
-		
-	
 </script>
 
 </head>
@@ -113,9 +196,9 @@
 
 		<div id="top_menu2">
 			<ul>
-				<li><a href="shop">Q&A</a></li>
+				<li><a href="qna">Q&A</a></li>
 				<li><a
-					href="${pageContext.request.contextPath}/goodscart?goodsName=">Cart</a></li>
+					href="${pageContext.request.contextPath}/goodscart?cartCount=1&goodsName=">Cart</a></li>
 				<li><a href="login">Login</a></li>
 			</ul>
 		</div>
@@ -123,14 +206,11 @@
 	</div>
 </header>
 
-
-
-
 <body>
 
 	<div class="cart">
 		<h1>カート</h1>
-
+		<p class="user">${userId}様 ようこそ</p>
 	</div>
 	<div class="container">
 		<div class="cart-form" method="POST">
@@ -140,44 +220,90 @@
 				placeholder="パスワード"> <input type="submit" value="ログイン"
 				class="submit-btn">
 		</form> -->
+			<div class="table-box">
+			
+				<c:forEach var="goods" items="${cartList}">
+					<table class="list-table ">
+
+						<div class="left">
+							<input type="hidden" id="${goods.cartNum}"
+								value="${goods.cartCount}">
+
+							<form id="myForm" name="myForm">
+								<input type="hidden" name="sample" id="sample" value="sample" />
+							</form>
+						</div>
+						<thead>
+							<tr>
+								<th width="150"></th>
+								<th width="150"></th>
+								<th width="150"></th>
+								<th width="150"></th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr>
+								<td width="200">
+									<div>
+										<div>
+											<a
+												href="${pageContext.request.contextPath}/goodsInfor?itemsDetail=${goods.goodPhoto}">
+												<img class="img" src="images/men/${goods.goodPhoto}"
+												width="150px" height="170px">
+											</a>
+										</div>
+										<div>
+											<input type="button" value="削除" class="btn1" name="del"
+												onclick="delCart(${goods.cartNum})">
+
+										</div>
+									</div>
+								</td>
+								<td width="150"><span id="goodsPrice">${goods.goodsName}</span>
+								</td>
+								<td width="150">${goods.goodsPrice}</td>
+								<td width="100"><select id="select_box${goods.cartNum}"
+									class="select_box" name="cartCount">
+										<c:forEach var="i" begin="1" end="10">
+											<option value="${i}">${i}</option>
+
+										</c:forEach>
+								</select></td>
+							</tr>
+						</tbody>
+
+					</table>
+				</c:forEach>
+			</div>
+
 			<form id="cartDel">
 				<input type="hidden" name="cartNum" id="cartNum">
 			</form>
 
-			<c:forEach var="goods" items="${cartList}">
-				<div class="left">
-
-					<a
-						href="${pageContext.request.contextPath}/goodsInfor?itemsDetail=${goods.goodPhoto}">
-						<img src="images/men/${goods.goodPhoto}" width="300px"
-						height="300px">
-					</a>
-
-					<!-- 						<div class="container"> -->
-					<p>${goods.goodsName}</p>
-					<input type="hidden" id="${goods.cartNum}"
-						value="${goods.cartCount}">
-					<p>
-						<span id="goodsPrice">${goods.goodsPrice}</span> <select
-							id="select_box${goods.cartNum}" class="select_box"
-							name="cartCount">
-							<c:forEach var="i" begin="1" end="10">
-								<option value="${i}">${i}</option>
-
-							</c:forEach>
-						</select> <input type="button" value="削除" class="btn1" name="del"
-							onclick="delCart(${goods.cartNum})">
-					</p>
-					<form id="myForm" name="myForm">
-						<input type="hidden" name="sample" id="sample" value="sample" />
-
-					</form>
-
-				</div>
-			</c:forEach>
 		</div>
-	</div>
+		<div class="cartsum">
+			<table class="sum">
+				<tr>
+					<th class="sum">注文内容</th>
+					<th class="sum1">${cartSum.cartCount}件</th>
+				</tr>
+				<tr>
+					<td class="sum">合計金額</td>
+					<td class="sum1">\ ${cartPrice.cartCount}</td>
+				</tr>
+			</table>
+			<div class="page">
+				<input type="button" value="購入手続きへ" class="btn2" name="buy"
+					onclick="location.href='http://localhost:8080/sky/shopclear'">
+			</div>
+			<div class="page">
+				<input type="button" value="買い物を続ける" class="btn3" name="shopping"
+					onclick="location.href='http://localhost:8080/sky/top'">
+			</div>
+		</div>
 
+	</div>
 
 </body>
 

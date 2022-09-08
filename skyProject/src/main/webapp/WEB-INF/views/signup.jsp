@@ -89,7 +89,8 @@ $(document).ready(function(){
 		  $('#signForm').attr('method', 'post');
 		  $('#signForm').submit();
 // 		  location.href = 'top';
- }}
+ }
+	 }
 </script>
 </head>
 

@@ -9,6 +9,10 @@ public interface CartDao {
 	public void cartInsert(String userId, String goodsName, String cartCount) throws Exception;
 
 	public void cartDel(String del) throws Exception;
+	
+	public CartDto cartSum(String userId) throws Exception;
+	
+	public CartDto cartPrice(String userId) throws Exception;
 
 	public List<CartDto> getCartList(String userId) throws Exception;
 

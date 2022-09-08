@@ -29,6 +29,8 @@ public class CartController {
 	public String cart(Locale locale, Model model, HttpSession session, @RequestParam String goodsName,
 			@RequestParam String cartCount, HttpServletRequest httpServletRequest) throws Exception {
 
+		CartDto cartPrice = null;
+		CartDto cartSum = null;
 		String userId = null;
 		List<CartDto> cartList = new ArrayList<CartDto>();
 //		List<GoodsDto> goods = new ArrayList<GoodsDto>();
@@ -41,9 +43,14 @@ public class CartController {
 		// userId 값을 가져온다
 
 //		goods = goodDao.getGoodsList(goodsName);
+		cartPrice = cartDao.cartPrice(userId);
+		cartSum = cartDao.cartSum(userId);
 		cartList = cartDao.getCartList(userId);
 
 //		model.addAttribute("goodsList", goods);
+		model.addAttribute("userId", userId);
+		model.addAttribute("cartPrice", cartPrice);
+		model.addAttribute("cartSum", cartSum);
 		model.addAttribute("cartList", cartList);
 
 		return "cart";// cartDao.cartInsert(cartDto.getUserId(), cartDto.getCartNum(),
@@ -55,17 +62,27 @@ public class CartController {
 	@RequestMapping(value = "/cartDel", method = { RequestMethod.GET, RequestMethod.POST })
 	public String reji(Locale locale, Model model, HttpSession session, @RequestParam String cartNum,
 			HttpServletRequest httpServletRequest) throws Exception {
+
+		CartDto cartPrice = null;
+		CartDto cartSum = null;
 		String userId = null;
+
 		userId = (String) session.getAttribute("userId");
 		List<CartDto> cartList = new ArrayList<CartDto>();
 		cartDao.cartDel(cartNum);
+
+		cartPrice = cartDao.cartPrice(userId);
+		cartSum = cartDao.cartSum(userId);
 		cartList = cartDao.getCartList(userId);
+
+		model.addAttribute("cartPrice", cartPrice);
+		model.addAttribute("cartSum", cartSum);
 		model.addAttribute("cartList", cartList);
 		return "cart";
 	}
-	
-	@RequestMapping(value="url.do")
-	public String urlMethod(HttpServletRequest request , HttpServletResponse response, Model model ) throws Exception {		
+
+	@RequestMapping(value = "url.do")
+	public String urlMethod(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 		// url.jsp라는 이름을 가진 팝업 생성
 		return "url";
 	}

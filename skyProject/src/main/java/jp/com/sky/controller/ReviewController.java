@@ -22,7 +22,7 @@ public class ReviewController {
 	private ReviewDao reviewDao;
 
 	@RequestMapping(value = "/reviewItem", method = { RequestMethod.GET, RequestMethod.POST })
-	public String reviewItem(Model model, HttpSession session, @RequestParam String riviewItem,
+	public String reviewItem(Model model, HttpSession session, @RequestParam String reviewItem,
 			@RequestParam String reviewNum) throws Exception {
 
 		String userId = null;
@@ -32,7 +32,7 @@ public class ReviewController {
 
 		userId = (String) session.getAttribute("userId");
 
-		reviewDto = reviewDao.getReviewItem(riviewItem, userId);
+		reviewDto = reviewDao.getReviewItem(reviewItem, userId);
 
 		reviewDao.reviewDel(reviewNum);
 
@@ -54,6 +54,26 @@ public class ReviewController {
 	 */
 	@RequestMapping(value = "/review", method = { RequestMethod.GET, RequestMethod.POST })
 	public String review(Model model, HttpSession session, @RequestParam String tittle, @RequestParam String review,
+			@RequestParam String goodsName, @RequestParam String reviewItem) throws Exception {
+
+		String userId = null;
+		ReviewDto reviewDto = new ReviewDto();
+		userId = (String) session.getAttribute("userId");
+
+		List<ReviewDto> reviewList = new ArrayList<ReviewDto>();
+
+		reviewDao.reviewInsert(userId, review, tittle, goodsName);
+		reviewDto = reviewDao.getReviewItem(reviewItem, userId);
+		reviewList = reviewDao.getReviewList(goodsName);
+
+		model.addAttribute("reviewDto", reviewDto);
+		model.addAttribute("reviewList", reviewList);
+
+		return "review";
+	}
+
+	@RequestMapping(value = "/reviewDel", method = { RequestMethod.GET, RequestMethod.POST })
+	public String reviewDel(Model model, HttpSession session, @RequestParam String reviewNum,
 			@RequestParam String goodsName) throws Exception {
 
 		String userId = null;
@@ -62,34 +82,11 @@ public class ReviewController {
 
 		List<ReviewDto> reviewList = new ArrayList<ReviewDto>();
 
-		reviewDao.reviewInsert(userId, review, tittle, goodsName);
-
-		reviewList = reviewDao.getReviewList(goodsName);
-
-		model.addAttribute("reviewList", reviewList);
-
-		return "review";
-	}
-
-	@RequestMapping(value = "/reviewDel", method = { RequestMethod.GET, RequestMethod.POST })
-	public String reviewDel(Model model, HttpSession session, @RequestParam String reviewNum, @RequestParam String goodsName) throws Exception {
-
-		String userId = null;
-
-		userId = (String) session.getAttribute("userId");
-		
-		List<ReviewDto> reviewList = new ArrayList<ReviewDto>();
-
-		
 		reviewDao.reviewDel(reviewNum);
-		
-		reviewList = reviewDao.getReviewList(goodsName);
-		
-		model.addAttribute("reviewList", reviewList);
-		
-		
-		
 
+		reviewList = reviewDao.getReviewList(goodsName);
+
+		model.addAttribute("reviewList", reviewList);
 		return "review";
 	}
 }

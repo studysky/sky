@@ -11,17 +11,17 @@
 <script language="javascript" type="text/javascript">
 	$(document).ready(function() {
 		var errorMessage;
-		errorMessage = $("reviewForm").val();
+		errorMessage = $("basketForm").val();
 
 		if (errorMessage != '' && errorMessage != undefined) {
 			alert(errorMessage);
 		}
 	});
 
-	var postUri = '${pageContext.request.contextPath}/signupOk'; //url signupOk 으로 값을 받음
-	$('#reviewForm').attr('action', postUri); //#signForm  form의id로 값 받아옴 
-	$('#reviewForm').attr('method', 'post');
-	$('#reviewForm').submit();
+	var postUri = '${pageContext.request.contextrPath}/basket';
+	$('#basketForm').attr('action', postUri);
+	$('#basketForm').attr('method', 'post');
+	$('#basketForm').submit();
 	// location.href = 'top';
 </script>
 <style type="text/css">
@@ -44,6 +44,39 @@
 	border: none;
 	padding: 15px 50px;
 	background: #000;
+	border-radius: 16px;
+	margin-top: 12px;
+	margin-bottom: 30px;
+	color: #fff;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.select_box {
+	width: 80px;
+	border: 1px solid;
+	box-sizing: border-box;
+	padding: 10px;
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 10px;
+	font-family: 'Roboto';
+}
+
+.select_box:focus {
+	border: 1px solid #18A8F1;
+	box-sizing: border-box;
+	border-radius: 10px;
+	outline: #18A8F1;
+}
+
+.btn2 {
+	display: inline;
+	border: none;
+	padding: 15px 50px;
+	background: red;
 	border-radius: 16px;
 	margin-top: 12px;
 	margin-bottom: 30px;
@@ -122,13 +155,26 @@
 		</form>
 
 		<form action="reviewItem" id="reviewForm">
-			<input type="hidden" value="${goodsName}" name="riviewItem">
+			<input type="hidden" value="${goodsName}" name="reviewItem">
 			<input type="hidden" value="" name="reviewNum"> <input
 				type="submit" class="btn1" value="add to review">
 		</form>
+
+		<form action="basket" id="basket">
+			<input type="hidden" value="${goodsName}" name="basketItem">
+			<input type="hidden" value="" name="basketNum"> <input
+				type="submit" class="btn2" value="add to basket">
+		</form>
 	</div>
 
-
+	<form action="basket" name="sign" id="basketForm">
+		<!-- 	<span>ID</span> -->
+		<p>
+			<span class="login_it"> <input type="hidden" id="errorMessage"
+				value="${errorMessage}">
+			</span>
+		</p>
+	</form>
 
 	<div class="clearfix"></div>
 </body>
